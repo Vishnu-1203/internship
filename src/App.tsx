@@ -3,12 +3,15 @@ import Buttons from "./components/button";
 import CalculatorDisplay from "./components/CalculatorDisplay";
 import { add, subtract, multiply, divide } from "./calcs";
 import "./styles2.css";
+
 const App: React.FC = () => {
   const [displayValue, setDisplayValue] = useState("");
-  const [enteredValue, SetEnteredValue] = useState("");
+  const [enteredValue, setEnteredValue] = useState("");
   const [var1, setVar1] = useState("");
-  let result: string;
-  let result2: string;
+  const [history, setHistory] = useState<string[]>([]);
+
+  let result: string = "";
+
   const handleNumberClick = (num: string) => {
     if (displayValue !== "0") {
       setDisplayValue(displayValue + num);
@@ -16,14 +19,16 @@ const App: React.FC = () => {
       setDisplayValue(num);
     }
   };
+
   const handleAcClick = () => {
     setDisplayValue("0");
-    SetEnteredValue("");
+    setEnteredValue("");
     setVar1("");
   };
+
   const handleOperatorClick = (op: string) => {
     if (enteredValue === "") {
-      SetEnteredValue(displayValue);
+      setEnteredValue(displayValue);
       setVar1(op);
       setDisplayValue("");
     } else {
@@ -44,8 +49,8 @@ const App: React.FC = () => {
           break;
       }
       setDisplayValue(result);
-      SetEnteredValue("");
-      setVar1(op); // Update the var1 value to the current operator
+      setEnteredValue("");
+      setVar1(op);
     }
   };
 
@@ -53,23 +58,24 @@ const App: React.FC = () => {
     if (enteredValue !== "") {
       switch (var1) {
         case "+":
-          result2 = add(displayValue, enteredValue);
+          result = add(displayValue, enteredValue);
           break;
         case "-":
-          result2 = subtract(displayValue, enteredValue);
+          result = subtract(displayValue, enteredValue);
           break;
         case "/":
-          result2 = divide(displayValue, enteredValue);
+          result = divide(displayValue, enteredValue);
           break;
         case "*":
-          result2 = multiply(displayValue, enteredValue);
+          result = multiply(displayValue, enteredValue);
           break;
         default:
           break;
       }
-      setDisplayValue(result2);
-      SetEnteredValue("");
+      setDisplayValue(result);
+      setEnteredValue("");
       setVar1("");
+      setHistory([...history, result].slice(-10)); // Update the history with the last 10 results
     }
   };
 
@@ -88,6 +94,12 @@ const App: React.FC = () => {
             handleOperatorClick={handleOperatorClick}
             handleResultClick={handleResultClick}
           />
+        </div>
+        <div className="history">
+          History:
+          {history.map((calculation, index) => (
+            <div key={index}>{calculation}</div>
+          ))}
         </div>
       </div>
     </>
