@@ -1,0 +1,11 @@
+.calculator {
+  position: relative;
+}
+
+.var1 {
+  position: absolute;
+  left: 7.5px;
+  top: 15px;
+  font-size: 2em;
+  font-weight: bold;
+}

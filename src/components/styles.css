@@ -1,0 +1,47 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Three equal-sized columns */
+  grid-gap: 2px; /* Gap between grid items */
+}
+
+.grid-items-numbers {
+  background-color: #ccc;
+  padding: 10px;
+}
+.AC {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: red;
+  color: white;
+  padding: 10px;
+}
+
+.grid-items-rest {
+  background-color: #f0f0f0;
+  color: #008000;
+  font-size: 30px;
+  text-align: center;
+  padding: 10px;
+}
+.calculator-display {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background-color: #6d6666;
+  color: #333;
+  font-size: 24px;
+  height: 60px;
+  padding: 10px;
+}
+
+.calculator-display .previous-value {
+  font-size: 24px;
+  color: #888;
+}
+
+.calculator-display .current-value {
+  font-size: 30px;
+  color: #000;
+}
